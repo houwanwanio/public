@@ -1,0 +1,63 @@
+
+一、配置JDK环境变量
+1，新建变量名：JAVA_HOME
+
+变量值：C:\Program Files (x86)\Java\jdk1.6.0_33（jdk的安装路径
+
+2，打开PATH，添加变量值：%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin
+
+3，新建变量名：CLASSPATH
+
+变量值：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar
+
+备注：
+
+1，.表示当前路径，%JAVA_HOME%就是引用前面指定的JAVA_HOME；
+
+2，JAVA_HOME指明JDK安装路径，此路径下包括lib，bin，jre等文件夹，tomcat，eclipse等的运行都需要依靠此变量。
+
+3，PATH使得系统可以在任何路径下识别java命令。
+
+4，CLASSPATH为java加载类(class or lib)路径，只类在classpath中，java命令才能识别。
+
+二、测试JDK 是否安装成功
+在CMD命令下输入javac，java，javadoc命令：出现图示界面，表示安装成功。
+
+
+一、配置Tomcat环境变量
+1，新建变量名：CATALINA_BASE
+
+变量值：C:D:\apache-tomcat-6.0.37（tomcat包的路径
+
+2，新建变量名：CATALINA_HOME
+
+变量值：C:D:\apache-tomcat-6.0.37
+
+3，打开PATH，添加变量值：%CATALINA_HOME%\lib;%CATALINA_HOME%\bin
+
+二、启动Tomcat服务
+方法两种：
+
+1，方法一：在CMD命令下输入命令：startup，出现如下对话框，表明服务启动成功。
+
+2，方法二：右键点击桌面上的“我的电脑”->“管理”->“服务和应用程序”->“服务”，找到“Apache     Tomcat”服务，右键点击该服务，择“属性”，将“启动类型”由“手动”改成“自动”。
+
+三、测试Tomcat
+打开浏览器，在地址栏中输入http://localhost:8080回车，如果看到Tomcat自带的一个JSP页面，说明你的JDK和Tomcat已搭建成功。
+
+
+
+设置Tomcat端口号和默认访问路径
+1、修改默认访问端口
+<Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+改成
+<Connector port="80" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+2、打开server.xml,在</Host>的上一行添加内容格式如下
+<Context path="" reloadable="true" docBase="<项目名>"/>
+如:
+<Context path="" docBase="xuantiantongmai" debug="0" reloadable="true"/>
+dosBase里写的是你要设置为默认项目的名称
